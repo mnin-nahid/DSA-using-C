@@ -1,5 +1,5 @@
-# Data Structures and Algorithms in C Programming (DSA-C)
-## Content
-#### Chapter 1 : Introduction to Data Structures.
-#### Chapter 2 : Introduction to Algorithms.
-#### Chapter 3 : Introduction to C Programming.
+# DSA-C Data Structures and Algorithms in C Programming
+
+### Introduction to Data Structures.
+### Introduction to Algorithms.
+### Introduction to C Programming.
