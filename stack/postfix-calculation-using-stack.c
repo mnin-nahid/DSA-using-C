@@ -52,29 +52,24 @@ void push(STACK *stack, char op)
     stack->array[++stack->top] = op;
 }
 
-// The main function that returns value
-// of a given postfix expression
+// The main function that returns value of a given postfix expression
 int evaluatePostfix(char *exp)
 {
     // Create a stack of capacity equal to expression size
     STACK *stack = createStack(strlen(exp));
-    int i;
-
     // See if stack was created successfully
     if (!stack)
         return -1;
 
     // Scan all characters one by one
-    for (i = 0; exp[i]; ++i)
+    for (int i = 0; exp[i]; ++i)
     {
 
-        // If the scanned character is an operand
-        // (number here), push it to the stack.
+        // If the scanned character is an operand(number here), push it to the stack.
         if (isdigit(exp[i]))
             push(stack, exp[i] - '0');
 
-        // If the scanned character is an operator,
-        // pop two elements from stack apply the operator
+        // If the scanned character is an operator,pop two elements from stack apply the operator
         else
         {
             int val1 = pop(stack);
