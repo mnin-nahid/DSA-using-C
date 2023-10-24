@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 // Stack type
 typedef struct Stack
@@ -88,6 +89,9 @@ int evaluatePostfix(char *exp)
             case '/':
                 push(stack, val2 / val1);
                 break;
+            // case '^':
+            //     push(stack, pow(val2, val1));
+            //     break;
             }
         }
     }
