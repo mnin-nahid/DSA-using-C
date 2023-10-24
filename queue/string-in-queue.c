@@ -5,14 +5,17 @@
 int insert(char queue[30][30], int *front, int *rear, char data[30], int size)
 {
     // printf("Insert\n");
-    if (*rear == size - 1)
+    if (*front == -1 && *rear == -1)
+    {
+        *front = *rear = 0;
+        strcpy(queue[*rear], data);
+    }
+    else if ((*rear + 1) % size == *front)
     {
         return -1;
     }
     else
     {
-        if (*front == -1)
-            *front = 0;
         *rear = (*rear + 1) % size;
         strcpy(queue[*rear], data);
         return 1;
@@ -41,15 +44,19 @@ int delete(char queue[30][30], int *front, int *rear, char data[30], int size)
 }
 void show(char queue[30][30], int *front, int *rear, int size)
 {
-    if (*front == -1 || *front == size)
+    int counter = *front;
+    if (*front == -1 && *rear == -1)
         printf("Queue is Empty\n");
     else
     {
         printf("Element on Queue \n");
-        for (int i = *front; i <= *rear; i++)
+        while (counter != *rear)
         {
-            printf("%s\n", queue[i]);
+            printf("%s\n", queue[counter]);
+            // if(counter == *rear) break;
+            counter = (counter + 1) % size;
         }
+        printf("%s\n", queue[*rear]);
     }
 }
 
@@ -71,15 +78,22 @@ int main()
         switch (choose)
         {
         case 1:
-            printf("Enter a Name : ");
-            scanf("%s", data);
-            funcReplay = insert(queue, &front, &rear, data, size);
-            if (funcReplay == -1)
-                printf("Queue is full\n");
+            if ((rear + 1) % size == front)
+            {
+                printf("Queue is Overflow\n");
+            }
             else
             {
-                printf("\n'%s' is Inserted\n", data);
-                printf("Front = %d \n Rear = %d\n", front, rear);
+                printf("Enter a Name : ");
+                scanf("%s", data);
+                funcReplay = insert(queue, &front, &rear, data, size);
+                if (funcReplay == -1)
+                    printf("Queue is full\n");
+                else
+                {
+                    printf("\n'%s' is Inserted\n", data);
+                    printf("Front = %d \n Rear = %d\n", front, rear);
+                }
             }
             break;
         case 2:
