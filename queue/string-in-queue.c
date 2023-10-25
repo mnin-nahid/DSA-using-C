@@ -10,6 +10,10 @@ int insert(char queue[30][30], int *front, int *rear, char data[30], int size)
         *front = *rear = 0;
         strcpy(queue[*rear], data);
     }
+    else if ((*rear + 1) % size == *front)
+    {
+        return -1;
+    }
     else
     {
         *rear = (*rear + 1) % size;
@@ -42,7 +46,7 @@ void show(char queue[30][30], int *front, int *rear, int size)
 {
     int counter = *front;
     if (*front == -1 && *rear == -1)
-        printf("Queue is Empty\n");
+        printf("\n\nQueue is Empty\n");
     else
     {
         printf("\t\tElement on Queue \n");
@@ -76,28 +80,32 @@ int main()
         case 1:
             if ((rear + 1) % size == front)
             {
-                printf("Queue is Overflow\n");
+                printf("\n\nQueue is Overflow\n");
             }
             else
             {
-                printf("Enter a name of ITEM : ");
+                printf("Enter a name of ITEM: ");
                 scanf("%s", data);
                 funcReplay = insert(queue, &front, &rear, data, size);
-
-                printf("\n\n'%s' is Inserted\n", data);
-                printf("Front = %d \n Rear = %d\n", front, rear);
+                if (funcReplay == -1)
+                    printf("\n\nQueue is full\n");
+                else
+                {
+                    printf("\n\n'%s' is Inserted\n", data);
+                    printf("\t\tFront = %d \n \t\tRear = %d\n", front, rear);
+                }
             }
             break;
         case 2:
             funcReplay = delete (queue, &front, &rear, data, size);
             if (funcReplay == -1)
             {
-                printf("Queue is Empty\n");
+                printf("\nQueue is Empty\n");
             }
             else
             {
                 printf("\n\n'%s' has been deleted success\n", data);
-                printf("Front = %d \n Rear = %d\n", front, rear);
+                printf("\t\tFront = %d \n\t\tRear = %d\n", front, rear);
             }
             break;
         case 3:
@@ -107,7 +115,6 @@ int main()
             exit(1);
             break;
         default:
-            printf("Wrong input, Try again!");
             break;
         }
     }
