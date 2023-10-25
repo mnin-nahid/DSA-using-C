@@ -10,10 +10,6 @@ int insert(char queue[30][30], int *front, int *rear, char data[30], int size)
         *front = *rear = 0;
         strcpy(queue[*rear], data);
     }
-    else if ((*rear + 1) % size == *front)
-    {
-        return -1;
-    }
     else
     {
         *rear = (*rear + 1) % size;
@@ -49,14 +45,14 @@ void show(char queue[30][30], int *front, int *rear, int size)
         printf("Queue is Empty\n");
     else
     {
-        printf("Element on Queue \n");
+        printf("\t\tElement on Queue \n");
         while (counter != *rear)
         {
-            printf("%s\n", queue[counter]);
+            printf("\t%s\n", queue[counter]);
             // if(counter == *rear) break;
             counter = (counter + 1) % size;
         }
-        printf("%s\n", queue[*rear]);
+        printf("\t%s\n", queue[*rear]);
     }
 }
 
@@ -84,16 +80,12 @@ int main()
             }
             else
             {
-                printf("Enter a Name : ");
+                printf("Enter a name of ITEM : ");
                 scanf("%s", data);
                 funcReplay = insert(queue, &front, &rear, data, size);
-                if (funcReplay == -1)
-                    printf("Queue is full\n");
-                else
-                {
-                    printf("\n'%s' is Inserted\n", data);
-                    printf("Front = %d \n Rear = %d\n", front, rear);
-                }
+
+                printf("\n\n'%s' is Inserted\n", data);
+                printf("Front = %d \n Rear = %d\n", front, rear);
             }
             break;
         case 2:
@@ -104,7 +96,7 @@ int main()
             }
             else
             {
-                printf("'%s' has been deleted success\n", data);
+                printf("\n\n'%s' has been deleted success\n", data);
                 printf("Front = %d \n Rear = %d\n", front, rear);
             }
             break;
@@ -115,6 +107,7 @@ int main()
             exit(1);
             break;
         default:
+            printf("Wrong input, Try again!");
             break;
         }
     }
