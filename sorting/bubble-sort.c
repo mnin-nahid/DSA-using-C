@@ -6,7 +6,7 @@ int main()
     int array[] = {3, 7, 9, 4, 6, 1, 8, 2, 5};
     for (int j = 0; j < 9; j++)
     {
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 8; i++)
         {
             if(array[i] > array[i+1]){
                 temp = array[i];
