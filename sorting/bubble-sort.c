@@ -5,7 +5,7 @@ int main()
 {
     int array[] = {14, 1,13, 7, 5,15, 4, 6,12, 11, 3, 8, 2, 9, 0, 10, 16, 17};
     int arr_size = sizeof(array) / sizeof(array[1]);
-    // int i = 0;
+    
     bubble_sort(array, arr_size);
 
     for (int i = 0; i < arr_size; i++)
