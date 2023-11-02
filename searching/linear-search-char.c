@@ -3,7 +3,7 @@
 int main()
 {
     char array[] = {'a', 'c', 'd', 'm', 'k', 'z', 'f', 'H', 'G', 'l', 'N', 'e', 'X'};
-    int location = 0, attempt = 0; 
+    int location = 0, attempt = 1; 
     char search_element;
     printf("enter search element : ");
     scanf("%c", &search_element);
