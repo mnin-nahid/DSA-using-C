@@ -12,7 +12,7 @@ int main()
     int search_index = binary_search(array, search_value, 0, length - 1);
     if (search_index != (-1))
     {
-        printf("we found %d, in %d index", search_value, search_index);
+        printf("we found %d, in %d index\n", search_value, search_index);
     }
     else
     {
