@@ -78,7 +78,7 @@ void insert_last(int value)
     newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->value = value;
     newNode->next = NULL;
-    
+
     if (head == NULL)
         head = newNode;
     else
@@ -92,11 +92,29 @@ void insert_last(int value)
 }
 void delete_first()
 {
-    printf("delete first work!\n");
+    struct Node *temp = head;
+    temp = temp->next;
+    printf("\t\t%d is delete success!\n", head->value);
+    head = temp;
 }
 void delete_last()
 {
-    printf("delete last work!\n");
+    struct Node *prev;
+    struct Node *temp = head;
+    if (head->next == NULL)
+    {
+        head = NULL;
+    }
+    else
+    {
+        while (temp->next != NULL)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+        prev->next = NULL;
+    }
+    printf("\n\t\t%d is delete succcess!\n", temp->value);
 }
 void display()
 {
@@ -108,7 +126,7 @@ void display()
         // temp = (struct Node*)malloc(sizeof(struct Node));
         temp = head;
 
-        printf("\t\tList value are\n\t");
+        printf("\n\n\t\tList value are\n\t");
         while (temp->next != NULL)
         {
             printf("%d --> ", temp->value);
