@@ -19,7 +19,7 @@ int main()
     int choice, value;
     while (1)
     {
-        printf("\tChoice Operation\n\t\t1.Insert First\n\t\t2.Insert Last\n\t\t3.Delete First\n\t\t4.Delete Last\n\t\t5.Display\n\t\t6.Search\n");
+        printf("\tChoice Operation\n\t\t1.Insert First\n\t\t2.Insert Last\n\t\t3.Delete First\n\t\t4.Delete Last\n\t\t5.Display\n\t\t6.Search\n\t\t7. Exit\n");
         printf("\tSelect Operation : ");
         scanf("%d", &choice);
         switch (choice)
@@ -80,30 +80,68 @@ void insert_first(int value)
 void insert_last(int value)
 {
     struct Node *newNode;
-    newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode = (struct Node *)malloc(sizeof(struct Node));
     newNode->value = value;
     newNode->next = NULL;
-    if(head == NULL){
+    if (head == NULL)
+    {
         newNode->previous = NULL;
         head = newNode;
-    }else{
+    }
+    else
+    {
         struct Node *temp = head;
         while (temp->next != NULL)
         {
             temp = temp->next;
         }
         temp->next = newNode;
-        newNode->previous = temp;        
+        newNode->previous = temp;
     }
     printf("\tInsert Value %d success!\n", value);
 }
 void delete_first()
 {
-    printf("delete first success\n");
+    if (head == NULL)
+        printf("\tList is Empty! delete not possible\n");
+    else
+    {
+        struct Node *temp = head;
+        if (temp->previous == temp->next)
+        {
+            head = NULL;
+            free(temp);
+        }
+        else
+        {
+            printf("delete %d success\n", head->value);
+            head = temp->next;
+            head->previous = NULL;
+            free(temp);
+        }
+    }
 }
 void delete_last()
 {
-    printf("delete last success\n");
+    if (head == NULL)
+        printf("List is empty! delete unsuccess!\n");
+    else
+    {
+        struct Node *temp = head;
+        if (temp->previous == temp->next)
+        {
+            printf("\tdelete %d success\n", temp->value);
+            head = NULL;
+            free(temp);
+        }
+        else
+        {
+            while (temp->next != NULL)
+                temp = temp->next;
+            printf("\tdelete %d success\n", temp->value);
+            temp->previous->next = NULL;
+        }
+    }
 }
 void display()
 {
@@ -126,5 +164,33 @@ void display()
 }
 void search(int value)
 {
-    printf("search for %d\n", value);
+    if (head == NULL)
+        printf("\tList is Empty!");
+    else
+    {
+        struct Node *temp = head;
+        if (temp->value == value)
+        {
+            printf("\t%d on the list\n");
+        }
+        else
+        {
+            while (temp->value != value)
+            {
+                if (temp->next == NULL)
+                {
+                    printf("\t %d not found int the list\n");
+                    break;
+                }
+                else if (temp->value == value)
+                {
+                    printf("\t %d on the list\n");
+                    break;
+                }
+                temp = temp->next;
+            }
+            if (temp->value == value)
+                printf(" %d is Found!\n", value);
+        }
+    }
 }
