@@ -46,8 +46,7 @@ int deque(struct Stack *stack){
 }
 int peek(struct Stack *stack){
     if(isEmpty(stack)){
-        fprintf(stderr, "Stack is Empty!\n");
-        exit(EXIT_FAILURE);
+        printf("Stack is Empty!\n");
     }
     return stack->top->value;
 }
