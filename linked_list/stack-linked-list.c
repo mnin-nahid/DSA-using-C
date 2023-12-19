@@ -1,75 +1,71 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node
-{
-    int value;
-    struct Node *next;
-} Node;
-
-struct Stack
-{
-    Node *top;
+struct Node {
+    int data;
+    struct Node* link;
 };
 
-void initializeStack(struct Stack *stack){
-    stack->top = NULL;
+struct Stack {
+    struct Node* top;
+};
+
+void push(struct Stack* stack, int data) {
+    struct Node* temp = (struct Node*)malloc(sizeof(struct Node));
+    if (temp == NULL) {
+        printf("\nStack Overflow");
+        exit(1);
+    }
+    temp->data = data;
+    temp->link = stack->top;
+    stack->top = temp;
 }
 
-int isEmpty(struct Stack *stack){
-    return(stack->top == NULL);
+int isEmpty(struct Stack* stack) {
+    return stack->top == NULL;
 }
 
-void enque(struct Stack *stack, int data){
-    //create a new node
-    Node *newNode = (Node*)malloc(sizeof(Node));
-    if(newNode == NULL){
-        fprintf(stderr, "Memory allocation failed!\n");
-        exit(EXIT_FAILURE);
-    }
-    newNode->value = data;
-    newNode->next = stack->top;
-
-    stack->top = newNode;
-}
-int deque(struct Stack *stack){
-    if(isEmpty(stack)){
-        printf("Stack UnderFlow!\n");
-        return;
-    }
-    int data = stack->top->value;
-
-    Node *temp = stack->top;
-    stack->top = stack->top->next;
-    free(temp);
-    return data;
-}
-int peek(struct Stack *stack){
-    if(isEmpty(stack)){
-        printf("Stack is Empty!\n");
-    }
-    return stack->top->value;
-}
-void display(struct Stack *stack){
-    if(isEmpty(stack)){
-        printf("Stack is Empty!\n");
-        return;
-    }
-    Node *current = stack->top;
-    printf("Stack : ");
-    while (current != NULL)
-    {
-        printf("%d -->", current->value);
-        current = current->next;
-    }
-    printf("NULL\n");
-    
+int peek(struct Stack* stack) {
+    if (!isEmpty(stack))
+        return stack->top->data;
+    else
+        exit(1);
 }
 
-int main()
-{
-    struct Stack *myStack;
-    initializeStack(&myStack);
+void pop(struct Stack* stack) {
+    struct Node* temp;
+    if (stack->top == NULL) {
+        printf("\nStack Underflow");
+        // exit(1);
+    }
+    else {
+        temp = stack->top;
+        stack->top = stack->top->link;
+        free(temp);
+    }
+}
+
+void display(struct Stack* stack) {
+    struct Node* temp;
+    if (stack->top == NULL) {
+        printf("\nStack Underflow");
+        // exit(1);
+    }
+    else {
+        temp = stack->top;
+        while (temp != NULL) {
+            printf("%d", temp->data);
+            temp = temp->link;
+            if (temp != NULL)
+                printf(" -> ");
+        }
+    }
+}
+
+int main() {
+    struct Stack s;
+    s.top = NULL;
+
     int choose, data;
     while (1)
     {
@@ -82,16 +78,16 @@ int main()
         case 1:
             printf("Enter a value : ");
             scanf("%d", &data);
-            enque(&myStack, data);
+            push(&s, data);
             break;
         case 2:
-            deque(&myStack);
+            pop(&s);
             break;
         case 3:
-            display(&myStack);
+            display(&s);
             break;
         case 4:
-            int top = peek(&myStack);
+            int top = peek(&s);
             printf("Top = %d", top);
             break;
         case 5:

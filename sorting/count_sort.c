@@ -5,20 +5,13 @@ int main()
     int array[] = {2, 8, 3, 1, 2, 7, 8, 9, 3, 2, 4};
     int length = sizeof(array) / sizeof(array[1]);
 
-    // find max number for frequency array;
-    //  int max_number= 1;
-    //  for(int i = 0; i < length;i++){
-    //      if(max_number < array[i]){
-    //          max_number = array[i];
-    //      }
-    //  }
-
-    // frequency array
+ //count how many times each element
     int frequency[10] = {0};
     for (int i = 0; i < length; i++)
     {
         frequency[array[i]]++;
     }
+
 
     // sum of frequency
     for (int i = 0; i < length; i++)
